@@ -3,8 +3,9 @@ import { connect } from "react-redux";
 import Profile from "./Profile";
 import { useParams } from "react-router-dom";
 import { getUserProfile } from "../../redux/profile-reducer";
+import { Navigate } from "react-router-dom";
 
-function ProfileContainer({ profile, getUserProfile }) {
+function ProfileContainer({ profile, getUserProfile, isAuth }) {
   let { userId } = useParams();
   if (!userId) {
     userId = 2;
@@ -14,6 +15,7 @@ function ProfileContainer({ profile, getUserProfile }) {
     getUserProfile(userId);
   }, [userId, getUserProfile]);
 
+  if (!isAuth) return <Navigate to={"/login"}></Navigate>;
   return (
     <div>
       <Profile profile={profile} />
@@ -23,6 +25,7 @@ function ProfileContainer({ profile, getUserProfile }) {
 
 let mapStateToProps = (state) => ({
   profile: state.profilePage.profile,
+  isAuth: state.auth.isAuth,
 });
 
 export default connect(mapStateToProps, { getUserProfile })(ProfileContainer);
