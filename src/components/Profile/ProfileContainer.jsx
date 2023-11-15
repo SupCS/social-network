@@ -17,10 +17,11 @@ function ProfileContainer({
   getStatus,
   status,
   updateStatus,
+  authorizedUserId,
 }) {
   let { userId } = useParams();
   if (!userId) {
-    userId = 30018;
+    userId = authorizedUserId;
   }
 
   useEffect(() => {
@@ -38,6 +39,8 @@ function ProfileContainer({
 let mapStateToProps = (state) => ({
   profile: state.profilePage.profile,
   status: state.profilePage.status,
+  authorizedUserId: state.auth.userId,
+  isAuth: state.auth.isAuth,
 });
 
 export default compose(
