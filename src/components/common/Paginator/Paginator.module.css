@@ -1,3 +1,25 @@
+.paginator {
+  margin: 5px 0px;
+}
+
+.pageNumber {
+  margin: 5px 0px;
+  padding: 3px;
+  border: 1px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.pageNumber:hover {
+  background-color: #f0f0f0;
+}
+
+.inputPage {
+  width: 30px !important;
+  margin-left: 10px;
+  text-align: center;
+}
+
 .selectedPage {
   font-weight: bold;
 }
