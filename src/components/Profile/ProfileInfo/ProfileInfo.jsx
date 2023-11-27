@@ -3,8 +3,8 @@ import classes from "./ProfileInfo.module.css";
 import Preloader from "../../common/Preloader/Preloader";
 import ProfileStatus from "./ProfileStatus";
 
-const ProfileInfo = (props) => {
-  if (!props.profile) {
+const ProfileInfo = ({ profile, status, updateStatus }) => {
+  if (!profile) {
     return <Preloader />;
   }
   return (
@@ -17,11 +17,8 @@ const ProfileInfo = (props) => {
         ></img>
       </div> */}
       <div className={classes.description_block}>
-        <img src={props.profile.photos.large} alt="profile pic" />
-        <ProfileStatus
-          status={props.status}
-          updateStatus={props.updateStatus}
-        />
+        <img src={profile.photos.large} alt="profile pic" />
+        <ProfileStatus status={status} updateStatus={updateStatus} />
       </div>
     </div>
   );
