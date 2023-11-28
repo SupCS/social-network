@@ -1,16 +1,23 @@
 import "./App.css";
+import React, { Suspense, Component } from "react";
 import Navbar from "./components/Navbar/Navbar";
-import UsersContainer from "./components/Users/UsersContainer";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import DialogsContainer from "./components/Dialogs/DialogsContainer";
-import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginPage from "./components/Login/Login";
-import { Component } from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { initializeApp } from "./redux/app-reducer";
 import Preloader from "./components/common/Preloader/Preloader";
+
+const DialogsContainer = React.lazy(() =>
+  import("./components/Dialogs/DialogsContainer")
+);
+const ProfileContainer = React.lazy(() =>
+  import("./components/Profile/ProfileContainer")
+);
+const UsersContainer = React.lazy(() =>
+  import("./components/Users/UsersContainer")
+);
 
 class App extends Component {
   componentDidMount() {
@@ -26,12 +33,23 @@ class App extends Component {
           <HeaderContainer />
           <Navbar />
           <div className="app-wrapper-content">
-            <Routes>
-              <Route path="/profile/:userId?" element={<ProfileContainer />} />
-              <Route path="/dialogs/*" element={<DialogsContainer />} />
-              <Route path="/users" element={<UsersContainer />} />
-              <Route path="/login" element={<LoginPage />} />
-            </Routes>
+            <Suspense
+              fallback={
+                <div>
+                  <Preloader />
+                </div>
+              }
+            >
+              <Routes>
+                <Route
+                  path="/profile/:userId?"
+                  element={<ProfileContainer />}
+                />
+                <Route path="/dialogs/*" element={<DialogsContainer />} />
+                <Route path="/users" element={<UsersContainer />} />
+                <Route path="/login" element={<LoginPage />} />
+              </Routes>
+            </Suspense>
           </div>
         </div>
       </BrowserRouter>
