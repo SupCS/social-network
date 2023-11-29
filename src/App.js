@@ -47,6 +47,7 @@ class App extends Component {
                 />
                 <Route path="/dialogs/*" element={<DialogsContainer />} />
                 <Route path="/users" element={<UsersContainer />} />
+                <Route path="/" element={<LoginPage />} />
                 <Route path="/login" element={<LoginPage />} />
               </Routes>
             </Suspense>
