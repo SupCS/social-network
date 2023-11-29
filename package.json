@@ -2,6 +2,7 @@
   "name": "react-kabzda-1",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://SupCS.github.io/social-network",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -17,7 +18,6 @@
     "redux-thunk": "^2.4.2",
     "reselect": "^4.1.8",
     "web-vitals": "^2.1.4",
-    "homepage": "https://SupCS.github.io/social-network"
   },
   "scripts": {
     "predeploy": "npm run build",
