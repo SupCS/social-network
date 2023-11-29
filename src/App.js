@@ -1,7 +1,7 @@
 import "./App.css";
 import React, { Suspense, Component } from "react";
 import Navbar from "./components/Navbar/Navbar";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginPage from "./components/Login/Login";
 import { connect } from "react-redux";
@@ -28,7 +28,7 @@ class App extends Component {
       return <Preloader></Preloader>;
     }
     return (
-      <BrowserRouter>
+      <HashRouter>
         <div className="app-wrapper">
           <HeaderContainer />
           <Navbar />
@@ -52,7 +52,7 @@ class App extends Component {
             </Suspense>
           </div>
         </div>
-      </BrowserRouter>
+      </HashRouter>
     );
   }
 }
