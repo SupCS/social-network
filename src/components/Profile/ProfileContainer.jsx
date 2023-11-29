@@ -6,6 +6,7 @@ import {
   getUserProfile,
   getStatus,
   updateStatus,
+  clearProfile,
 } from "../../redux/profile-reducer";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import { compose } from "redux";
@@ -18,6 +19,7 @@ function ProfileContainer({
   status,
   updateStatus,
   authorizedUserId,
+  clearProfile,
 }) {
   let { userId } = useParams();
   if (!userId) {
@@ -27,7 +29,10 @@ function ProfileContainer({
   useEffect(() => {
     getUserProfile(userId);
     getStatus(userId);
-  }, [userId, getUserProfile, getStatus]);
+    return () => {
+      clearProfile();
+    };
+  }, [userId, getUserProfile, getStatus, clearProfile]);
 
   return (
     <div>
@@ -44,6 +49,11 @@ let mapStateToProps = (state) => ({
 });
 
 export default compose(
-  connect(mapStateToProps, { getUserProfile, getStatus, updateStatus }),
+  connect(mapStateToProps, {
+    getUserProfile,
+    getStatus,
+    updateStatus,
+    clearProfile,
+  }),
   withAuthRedirect
 )(ProfileContainer);

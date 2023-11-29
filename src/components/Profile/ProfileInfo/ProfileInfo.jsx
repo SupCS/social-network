@@ -1,7 +1,8 @@
 import React from "react";
-import classes from "./ProfileInfo.module.css";
+import styles from "./ProfileInfo.module.css";
 import Preloader from "../../common/Preloader/Preloader";
 import ProfileStatus from "./ProfileStatus";
+import userPhoto from "../../../assets/images/user.png";
 
 const ProfileInfo = ({ profile, status, updateStatus }) => {
   if (!profile) {
@@ -16,8 +17,12 @@ const ProfileInfo = ({ profile, status, updateStatus }) => {
           alt="profile banner"
         ></img>
       </div> */}
-      <div className={classes.description_block}>
-        <img src={profile.photos.large} alt="profile pic" />
+      <div className={styles.description_block}>
+        <img
+          src={profile.photos.large || userPhoto}
+          className={styles.avatar}
+          alt="profile pic"
+        />
         <ProfileStatus status={status} updateStatus={updateStatus} />
       </div>
     </div>

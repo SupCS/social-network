@@ -5,6 +5,7 @@ const ADD_POST = "ADD_POST";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
 const SET_STATUS = "SET_STATUS";
 const DELETE_POST = "DELETE_POST";
+const CLEAR_PROFILE = "CLEAR_PROFILE";
 
 let initialState = {
   posts: [
@@ -46,6 +47,13 @@ const profileReducer = (state = initialState, action) => {
         posts: state.posts.filter((p) => p.id !== action.postId),
       };
     }
+    case CLEAR_PROFILE: {
+      return {
+        ...state,
+        profile: null,
+        status: "",
+      };
+    }
     default:
       return state;
   }
@@ -61,6 +69,7 @@ export const setUserProfile = (profile) => ({
 });
 export const setStatus = (status) => ({ type: SET_STATUS, status });
 export const deletePost = (postId) => ({ type: DELETE_POST, postId });
+export const clearProfile = () => ({ type: CLEAR_PROFILE });
 
 export const getUserProfile = (userId) => async (dispatch) => {
   let response = await usersAPI.getProfile(userId);
