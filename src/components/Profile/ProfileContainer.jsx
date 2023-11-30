@@ -7,6 +7,7 @@ import {
   getStatus,
   updateStatus,
   clearProfile,
+  saveProfile,
 } from "../../redux/profile-reducer";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import { compose } from "redux";
@@ -22,6 +23,7 @@ function ProfileContainer({
   authorizedUserId,
   clearProfile,
   savePhoto,
+  saveProfile,
 }) {
   let { userId } = useParams();
   if (!userId) {
@@ -46,6 +48,7 @@ function ProfileContainer({
         updateStatus={updateStatus}
         isOwner={isOwner}
         savePhoto={savePhoto}
+        saveProfile={saveProfile}
       />
     </div>
   );
@@ -65,6 +68,7 @@ export default compose(
     updateStatus,
     clearProfile,
     savePhoto,
+    saveProfile,
   }),
   withAuthRedirect
 )(ProfileContainer);

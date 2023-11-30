@@ -32,6 +32,7 @@ const ProfileStatus = (props) => {
         </div>
       ) : (
         <div>
+          <b>Status: </b>
           <span onDoubleClick={editStatus}>
             {status || "Hello, that's a default status! Double Click to change"}
           </span>
