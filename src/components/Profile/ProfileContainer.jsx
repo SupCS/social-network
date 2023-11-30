@@ -10,6 +10,7 @@ import {
 } from "../../redux/profile-reducer";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import { compose } from "redux";
+import { savePhoto } from "../../redux/profile-reducer";
 
 function ProfileContainer({
   profile,
@@ -20,11 +21,14 @@ function ProfileContainer({
   updateStatus,
   authorizedUserId,
   clearProfile,
+  savePhoto,
 }) {
   let { userId } = useParams();
   if (!userId) {
     userId = authorizedUserId;
   }
+
+  const isOwner = !userId || userId === authorizedUserId;
 
   useEffect(() => {
     getUserProfile(userId);
@@ -36,7 +40,13 @@ function ProfileContainer({
 
   return (
     <div>
-      <Profile profile={profile} status={status} updateStatus={updateStatus} />
+      <Profile
+        profile={profile}
+        status={status}
+        updateStatus={updateStatus}
+        isOwner={isOwner}
+        savePhoto={savePhoto}
+      />
     </div>
   );
 }
@@ -54,6 +64,7 @@ export default compose(
     getStatus,
     updateStatus,
     clearProfile,
+    savePhoto,
   }),
   withAuthRedirect
 )(ProfileContainer);

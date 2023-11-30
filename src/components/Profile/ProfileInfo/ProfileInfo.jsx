@@ -4,10 +4,17 @@ import Preloader from "../../common/Preloader/Preloader";
 import ProfileStatus from "./ProfileStatus";
 import userPhoto from "../../../assets/images/user.png";
 
-const ProfileInfo = ({ profile, status, updateStatus }) => {
+const ProfileInfo = ({ profile, status, updateStatus, isOwner, savePhoto }) => {
   if (!profile) {
     return <Preloader />;
   }
+
+  const onMainPhotoSelected = (e) => {
+    if (e.target.files.length) {
+      savePhoto(e.target.files[0]);
+    }
+  };
+
   return (
     <div>
       {/* <div className={classes.banner__container}>
@@ -23,6 +30,7 @@ const ProfileInfo = ({ profile, status, updateStatus }) => {
           className={styles.avatar}
           alt="profile pic"
         />
+        {isOwner && <input type="file" onChange={onMainPhotoSelected} />}
         <ProfileStatus status={status} updateStatus={updateStatus} />
       </div>
     </div>
