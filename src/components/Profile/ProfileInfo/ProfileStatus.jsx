@@ -9,9 +9,11 @@ const ProfileStatus = (props) => {
   }, [props.status]);
 
   const editStatus = () => {
-    setEditMode(!editMode);
-    if (editMode) {
-      props.updateStatus(status);
+    if (props.isOwner) {
+      setEditMode(!editMode);
+      if (editMode) {
+        props.updateStatus(status);
+      }
     }
   };
 
@@ -34,7 +36,10 @@ const ProfileStatus = (props) => {
         <div>
           <b>Status: </b>
           <span onDoubleClick={editStatus}>
-            {status || "Hello, that's a default status! Double Click to change"}
+            {status ||
+              (props.isOwner
+                ? "Hello, that's a default status! Double Click to change"
+                : "No status yet")}
           </span>
         </div>
       )}

@@ -64,7 +64,11 @@ const ProfileInfo = ({
             goToEditMode={() => setEditMode(true)}
           />
         )}
-        <ProfileStatus status={status} updateStatus={updateStatus} />
+        <ProfileStatus
+          status={status}
+          updateStatus={updateStatus}
+          isOwner={isOwner}
+        />
       </div>
     </div>
   );

@@ -1,13 +1,14 @@
 import "./App.css";
 import React, { Suspense, Component } from "react";
 import Navbar from "./components/Navbar/Navbar";
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginPage from "./components/Login/Login";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { initializeApp } from "./redux/app-reducer";
 import Preloader from "./components/common/Preloader/Preloader";
+import ErrorBoundary from "./ErrorBoundary";
 
 const DialogsContainer = React.lazy(() =>
   import("./components/Dialogs/DialogsContainer")
@@ -33,24 +34,26 @@ class App extends Component {
           <HeaderContainer />
           <Navbar />
           <div className="app-wrapper-content">
-            <Suspense
-              fallback={
-                <div>
-                  <Preloader />
-                </div>
-              }
-            >
-              <Routes>
-                <Route
-                  path="/profile/:userId?"
-                  element={<ProfileContainer />}
-                />
-                <Route path="/dialogs/*" element={<DialogsContainer />} />
-                <Route path="/users" element={<UsersContainer />} />
-                <Route path="/" element={<LoginPage />} />
-                <Route path="/login" element={<LoginPage />} />
-              </Routes>
-            </Suspense>
+            <ErrorBoundary>
+              <Suspense
+                fallback={
+                  <div>
+                    <Preloader />
+                  </div>
+                }
+              >
+                <Routes>
+                  <Route
+                    path="/profile/:userId?"
+                    element={<ProfileContainer />}
+                  />
+                  <Route path="/dialogs/*" element={<DialogsContainer />} />
+                  <Route path="/users" element={<UsersContainer />} />
+                  <Route path="/login" element={<LoginPage />} />
+                  <Route path="/" element={<Navigate to="/login" replace />} />
+                </Routes>
+              </Suspense>
+            </ErrorBoundary>
           </div>
         </div>
       </HashRouter>
