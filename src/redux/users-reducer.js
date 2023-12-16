@@ -101,7 +101,9 @@ const followUnfollowFlow = async (
   actionCreator
 ) => {
   dispatch(toggleFollowingProgress(true, userId));
+  console.log("UserID for follow/unfollow:", userId);
   let response = await apiMethod(userId);
+  console.log("API Response:", response);
   if (response.data.resultCode === 0) {
     dispatch(actionCreator(userId));
   }

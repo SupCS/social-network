@@ -30,6 +30,7 @@ let User = ({ user, followingInProgress, unfollow, follow }) => {
             <button
               disabled={followingInProgress.some((id) => id === user.id)}
               onClick={() => {
+                console.log("Following user ID:", user.id);
                 follow(user.id);
               }}
             >
