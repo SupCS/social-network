@@ -48,6 +48,10 @@ class App extends Component {
                     element={<ProfileContainer />}
                   />
                   <Route path="/dialogs/*" element={<DialogsContainer />} />
+                  <Route
+                    path="/dialogs/:userId"
+                    element={<DialogsContainer />}
+                  />
                   <Route path="/users" element={<UsersContainer />} />
                   <Route path="/login" element={<LoginPage />} />
                   <Route path="/" element={<Navigate to="/login" replace />} />

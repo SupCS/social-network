@@ -9,8 +9,12 @@ import {
 const maxLength50 = maxLengthCreator(50);
 
 const AddMessageForm = (props) => {
+  const submitForm = (values) => {
+    props.onSubmit(values);
+    props.reset(); // Очистка формы после отправки
+  };
   return (
-    <form onSubmit={props.handleSubmit}>
+    <form onSubmit={props.handleSubmit(submitForm)}>
       <div>
         <Field
           component={Textarea}

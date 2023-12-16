@@ -1,20 +1,42 @@
-import { sendMessageCreator } from "../../redux/dialogs-reducer";
+import {
+  sendMessageCreator,
+  setMessages,
+  getDialogs,
+} from "../../redux/messages-reducer";
 import Dialogs from "./Dialogs";
 import { connect } from "react-redux";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import { compose } from "redux";
+import { dialogsAPI } from "../../api/api";
 
-let mapStateToProps = (state) => {
+const mapStateToProps = (state) => {
   return {
-    dialogsPage: state.dialogsPage,
+    messagesPage: state.messagesPage,
+    currentUserId: state.auth.userId,
   };
 };
 
-let mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    sendMessage: (newMessageBody) => {
-      dispatch(sendMessageCreator(newMessageBody));
+    getMessages: (userId) => {
+      console.log("Getting messages for user:", userId);
+      dialogsAPI.getMessages(userId).then((response) => {
+        console.log("Messages received:", response.data);
+        dispatch(setMessages(response.data));
+      });
     },
+    sendMessage: (userId, newMessageBody) => {
+      dialogsAPI.sendMessage(userId, newMessageBody).then((response) => {
+        dispatch(sendMessageCreator(response.data));
+      });
+    },
+
+    getDialogs: () => {
+      dialogsAPI.getDialogs().then((response) => {
+        dispatch(getDialogs(response.data));
+      });
+    },
+    // Дополнительные функции
   };
 };
 
