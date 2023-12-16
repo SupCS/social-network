@@ -4,6 +4,11 @@ import Message from "./Message/Message";
 import AddMessageForm from "./AddMessageForm/AddMessageForm.jsx";
 import { Navigate, useParams } from "react-router-dom";
 import classes from "./Dialogs.module.css";
+import io from "socket.io-client";
+import { useDispatch } from "react-redux";
+import { sendMessageCreator } from "../../redux/messages-reducer";
+
+const socket = io("http://localhost:3001"); // Подключение к серверу Socket.io
 
 const Dialogs = ({
   getDialogs,
@@ -14,18 +19,37 @@ const Dialogs = ({
   currentUserId,
 }) => {
   const { userId } = useParams(); // Получаем userId из URL
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("Fetching dialogs");
     getDialogs();
-  }, [getDialogs]);
-
-  useEffect(() => {
     if (userId) {
-      console.log("Fetching messages for userId:", userId);
       getMessages(userId);
     }
-  }, [userId, getMessages]);
+  }, [getDialogs, getMessages, userId]);
+
+  useEffect(() => {
+    socket.on("receive-message", (newMessage) => {
+      if (newMessage.senderId !== currentUserId) {
+        dispatch(sendMessageCreator(newMessage));
+      }
+    });
+
+    return () => {
+      socket.off("receive-message");
+    };
+  }, [dispatch, currentUserId]);
+
+  const addNewMessage = (values) => {
+    const messageData = {
+      senderId: currentUserId,
+      receiverId: userId,
+      text: values.newMessageBody,
+    };
+    sendMessage(userId, values.newMessageBody); // API запрос на отправку сообщения
+    socket.emit("new-message", messageData); // Отправка сообщения через сокет
+  };
+
   let dialogsElements = messagesPage.dialogs.map((d) => (
     <DialogItem name={d.name} key={d.id} id={d.id} />
   ));
@@ -34,15 +58,11 @@ const Dialogs = ({
       message={m.text}
       key={m._id}
       senderId={m.senderId}
-      currentUserId={currentUserId} // Используем currentUserId из props
+      currentUserId={currentUserId}
     />
   ));
 
   if (!isAuth) return <Navigate to={"/login"} />;
-
-  const addNewMessage = (values) => {
-    sendMessage(userId, values.newMessageBody); // Передаем userId при отправке сообщения
-  };
 
   return (
     <div className={classes.dialogs}>
