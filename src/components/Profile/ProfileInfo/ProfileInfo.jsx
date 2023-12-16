@@ -4,6 +4,7 @@ import Preloader from "../../common/Preloader/Preloader";
 import ProfileStatus from "./ProfileStatus";
 import userPhoto from "../../../assets/images/user.png";
 import ProfileDataForm from "./ProfileDataForm";
+import { Link } from "react-router-dom";
 
 const ProfileInfo = ({
   profile,
@@ -14,6 +15,7 @@ const ProfileInfo = ({
   saveProfile,
 }) => {
   const [editMode, setEditMode] = useState(false);
+  console.log(profile);
 
   if (!profile) {
     return <Preloader />;
@@ -34,7 +36,6 @@ const ProfileInfo = ({
         console.error("Saving profile error: ", error);
       });
   };
-
   return (
     <div>
       {/* <div className={classes.banner__container}>
@@ -62,6 +63,7 @@ const ProfileInfo = ({
             profile={profile}
             isOwner={isOwner}
             goToEditMode={() => setEditMode(true)}
+            userId={profile.userId}
           />
         )}
         <ProfileStatus
@@ -74,7 +76,7 @@ const ProfileInfo = ({
   );
 };
 
-const ProfileData = ({ profile, isOwner, goToEditMode }) => {
+const ProfileData = ({ profile, isOwner, goToEditMode, userId }) => {
   return (
     <div>
       <div>
@@ -105,6 +107,11 @@ const ProfileData = ({ profile, isOwner, goToEditMode }) => {
       {isOwner && (
         <div>
           <button onClick={goToEditMode}>Edit</button>
+        </div>
+      )}
+      {!isOwner && (
+        <div>
+          <Link to={`/dialogs/${profile.id}`}>Chat</Link>
         </div>
       )}
     </div>

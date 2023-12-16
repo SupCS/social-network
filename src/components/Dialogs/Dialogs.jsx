@@ -30,7 +30,11 @@ const Dialogs = ({
 
   useEffect(() => {
     socket.on("receive-message", (newMessage) => {
-      if (newMessage.senderId !== currentUserId) {
+      // Проверяем, относится ли сообщение к текущему открытому диалогу
+      if (
+        (newMessage.senderId === userId || newMessage.receiverId === userId) &&
+        newMessage.senderId !== currentUserId
+      ) {
         dispatch(sendMessageCreator(newMessage));
       }
     });
@@ -38,7 +42,7 @@ const Dialogs = ({
     return () => {
       socket.off("receive-message");
     };
-  }, [dispatch, currentUserId]);
+  }, [dispatch, currentUserId, userId]); // Добавляем userId в зависимости
 
   const addNewMessage = (values) => {
     const messageData = {
