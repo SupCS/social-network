@@ -63,6 +63,7 @@ const Dialogs = ({
       message={m.text}
       key={m._id}
       senderId={m.senderId}
+      senderName={m.senderName}
       currentUserId={currentUserId}
     />
   ));
@@ -73,8 +74,8 @@ const Dialogs = ({
     <div className={classes.dialogs}>
       <div className={classes.dialogsItems}>{dialogsElements}</div>
       <div className={classes.messages}>
-        {messagesElements}
-        <AddMessageForm onSubmit={addNewMessage} />
+        {userId ? messagesElements : null}
+        {userId && <AddMessageForm onSubmit={addNewMessage} />}
       </div>
     </div>
   );
