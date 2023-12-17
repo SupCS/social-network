@@ -30,19 +30,20 @@ const Dialogs = ({
 
   useEffect(() => {
     socket.on("receive-message", (newMessage) => {
-      // Проверяем, относится ли сообщение к текущему открытому диалогу
-      if (
-        (newMessage.senderId === userId || newMessage.receiverId === userId) &&
-        newMessage.senderId !== currentUserId
-      ) {
-        dispatch(sendMessageCreator(newMessage));
+      if (newMessage.senderId === userId || newMessage.receiverId === userId) {
+        if (newMessage.senderId !== currentUserId) {
+          dispatch(sendMessageCreator(newMessage));
+        }
+      } else if (newMessage.senderId !== currentUserId) {
+        // Пользователь, с которым нет открытого диалога, отправил сообщение
+        getDialogs(); // Запросить обновленный список диалогов
       }
     });
 
     return () => {
       socket.off("receive-message");
     };
-  }, [dispatch, currentUserId, userId]); // Добавляем userId в зависимости
+  }, [dispatch, getDialogs, currentUserId, userId]);
 
   const addNewMessage = (values) => {
     const messageData = {
