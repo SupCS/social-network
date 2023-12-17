@@ -1,22 +1,37 @@
-import { addPostActionCreator } from "../../../redux/profile-reducer";
 import MyPosts from "./MyPosts";
 import { connect } from "react-redux";
+import {
+  createPost,
+  removePost,
+  toggleLike,
+} from "../../../redux/post-reducer";
 
 let mapStateToProps = (state) => {
   return {
-    posts: state.profilePage.posts,
-    newPostText: state.profilePage.newPostText,
+    posts: state.post.posts,
+    currentUserId: state.auth.userId,
   };
 };
 
 let mapDispatchToProps = (dispatch) => {
   return {
     addPost: (newPostText) => {
-      dispatch(addPostActionCreator(newPostText));
+      dispatch(createPost(newPostText));
+    },
+    deletePost: (postId) => {
+      dispatch(removePost(postId));
+    },
+    toggleLike: (postId) => {
+      dispatch(toggleLike(postId));
     },
   };
 };
 
-const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts);
+const MyPostsContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(({ isOwner, currentUserId, ...props }) => (
+  <MyPosts isOwner={isOwner} currentUserId={currentUserId} {...props} />
+));
 
 export default MyPostsContainer;

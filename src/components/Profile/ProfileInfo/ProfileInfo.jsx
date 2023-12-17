@@ -15,7 +15,6 @@ const ProfileInfo = ({
   saveProfile,
 }) => {
   const [editMode, setEditMode] = useState(false);
-  console.log(profile);
 
   if (!profile) {
     return <Preloader />;

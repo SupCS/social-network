@@ -9,6 +9,7 @@ import {
   clearProfile,
   saveProfile,
 } from "../../redux/profile-reducer";
+import { fetchPosts } from "../../redux/post-reducer";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import { compose } from "redux";
 import { savePhoto } from "../../redux/profile-reducer";
@@ -24,6 +25,7 @@ function ProfileContainer({
   clearProfile,
   savePhoto,
   saveProfile,
+  fetchPosts,
 }) {
   let { userId } = useParams();
   if (!userId) {
@@ -35,10 +37,11 @@ function ProfileContainer({
   useEffect(() => {
     getUserProfile(userId);
     getStatus(userId);
+    fetchPosts(userId);
     return () => {
       clearProfile();
     };
-  }, [userId, getUserProfile, getStatus, clearProfile]);
+  }, [userId, getUserProfile, getStatus, clearProfile, fetchPosts]);
 
   return (
     <div>
@@ -69,6 +72,7 @@ export default compose(
     clearProfile,
     savePhoto,
     saveProfile,
+    fetchPosts,
   }),
   withAuthRedirect
 )(ProfileContainer);

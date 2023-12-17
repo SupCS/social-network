@@ -14,7 +14,15 @@ const MyPosts = React.memo((props) => {
   let postsElements = [...props.posts]
     .reverse()
     .map((p) => (
-      <Post key={p.id} message={p.message} likesCount={p.likesCount} />
+      <Post
+        key={p._id}
+        message={p.message}
+        likesCount={p.likes ? p.likes.length : 0}
+        onDelete={() => props.deletePost(p._id)}
+        isOwner={props.isOwner}
+        onLike={() => props.toggleLike(p._id)}
+        isLikedByCurrentUser={p.likes.includes(props.currentUserId)}
+      />
     ));
 
   let onAddPost = (values) => {
@@ -23,10 +31,12 @@ const MyPosts = React.memo((props) => {
 
   return (
     <div className={classes.posts_block}>
-      <h3>My posts</h3>
-      <div>
-        <AddNewPostReduxForm onSubmit={onAddPost} />
-      </div>
+      {props.isOwner ? <h3>My posts</h3> : <h3>Posts</h3>}
+      {props.isOwner && (
+        <div>
+          <AddNewPostReduxForm onSubmit={onAddPost} />
+        </div>
+      )}
       <div className={classes.posts}>{postsElements}</div>
     </div>
   );

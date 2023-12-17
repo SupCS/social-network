@@ -87,3 +87,24 @@ export const dialogsAPI = {
     return instance.post(`messages`, { receiverId: userId, text: message });
   },
 };
+
+export const postsAPI = {
+  getPosts(userId) {
+    return instance
+      .get(`posts?userId=${userId}`)
+      .then((response) => response.data);
+  },
+  createPost(newPostText) {
+    return instance
+      .post(`posts`, { message: newPostText })
+      .then((response) => response.data);
+  },
+  deletePost(postId) {
+    return instance.delete(`posts/${postId}`).then((response) => response.data);
+  },
+  toggleLike(postId) {
+    return instance
+      .post(`posts/${postId}/toggle-like`)
+      .then((response) => response.data);
+  },
+};
