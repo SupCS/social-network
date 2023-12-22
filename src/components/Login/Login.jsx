@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { login } from "../../redux/auth-reducer";
 import { Navigate, Link } from "react-router-dom";
 import styles from "./../common/FormControls/FormControls.module.css";
+import PurpleButton from "../common/Buttons/PurpleButton";
 
 const LoginForm = ({ handleSubmit, error, captchaUrl }) => {
   return (
@@ -29,7 +30,7 @@ const LoginForm = ({ handleSubmit, error, captchaUrl }) => {
         createField("Symbols from image", "captcha", [required], Input)}
       {error && <div className={styles.formSummaryError}>{error}</div>}
       <div>
-        <button className={styles.loginButton}>Login</button>
+        <PurpleButton text="Login"></PurpleButton>
       </div>
     </form>
   );

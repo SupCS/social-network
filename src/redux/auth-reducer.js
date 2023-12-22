@@ -83,28 +83,31 @@ export const logout = () => async (dispatch) => {
   }
 };
 export const register = (name, email, login, password) => async (dispatch) => {
-  try {
-    let response = await authAPI.register(name, email, login, password);
-    if (response.data.resultCode === 0) {
-      dispatch(registerSuccess());
-    } else {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let response = await authAPI.register(name, email, login, password);
+      if (response.data.resultCode === 0) {
+        dispatch(registerSuccess());
+        resolve(); // Успешное выполнение
+      } else {
+        let message =
+          response.data.messages.length > 0
+            ? response.data.messages[0]
+            : "Some error";
+        dispatch(stopSubmit("register", { _error: message }));
+        reject(); // Ошибка
+      }
+    } catch (error) {
       let message =
-        response.data.messages.length > 0
-          ? response.data.messages[0]
-          : "Some error";
+        error.response &&
+        error.response.data &&
+        error.response.data.messages &&
+        error.response.data.messages.length > 0
+          ? error.response.data.messages[0]
+          : "Registration failed";
       dispatch(stopSubmit("register", { _error: message }));
+      reject(message);
     }
-  } catch (error) {
-    // Обработка ошибки Axios
-    let message =
-      error.response &&
-      error.response.data &&
-      error.response.data.messages &&
-      error.response.data.messages.length > 0
-        ? error.response.data.messages[0]
-        : "Registration failed";
-    dispatch(stopSubmit("register", { _error: message }));
-  }
+  });
 };
-
 export default authReducer;

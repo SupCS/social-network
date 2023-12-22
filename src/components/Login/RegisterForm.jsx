@@ -3,8 +3,10 @@ import { reduxForm } from "redux-form";
 import { Input, createField } from "../common/FormControls/FormControls";
 import { required, minLengthCreator } from "../../utils/validators/validators";
 import { connect } from "react-redux";
-import { register } from "../../redux/auth-reducer"; // Импортируйте вашу thunk-функцию регистрации
+import { register } from "../../redux/auth-reducer";
 import styles from "./../common/FormControls/FormControls.module.css";
+import { useNavigate } from "react-router-dom";
+import PurpleButton from "../common/Buttons/PurpleButton";
 
 const minLength6 = minLengthCreator(6);
 
@@ -21,7 +23,7 @@ const RegisterForm = ({ handleSubmit, error }) => {
         })}
         {error && <div className={styles.formSummaryError}>{error}</div>}
         <div>
-          <button>Register</button>
+          <PurpleButton text="Register"></PurpleButton>
         </div>
       </form>
     </>
@@ -33,13 +35,21 @@ const RegisterReduxForm = reduxForm({
 })(RegisterForm);
 
 const Register = (props) => {
+  const navigate = useNavigate();
   const onSubmit = (formData) => {
-    props.register(
-      formData.name,
-      formData.email,
-      formData.login,
-      formData.password
-    );
+    props
+      .register(
+        formData.name,
+        formData.email,
+        formData.login,
+        formData.password
+      )
+      .then(() => {
+        navigate("/login");
+      })
+      .catch((errorMessage) => {
+        console.error(errorMessage);
+      });
   };
 
   return <RegisterReduxForm onSubmit={onSubmit} />;
