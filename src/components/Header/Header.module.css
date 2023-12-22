@@ -1,16 +1,37 @@
+/* Header.module.css */
+
 .header {
+  display: flex; /* Use flexbox */
+  justify-content: space-between; /* Space between logo and login block */
+  align-items: center; /* Center items vertically */
   grid-area: h;
-  background-color: green;
+  background-color: #222222;
 }
 
 .header img {
+  padding-left: 30px;
   width: 80px;
 }
 
 .loginBlock {
-  float: right;
+  display: flex;
+  padding-right: 10px;
+  flex-direction: row;
 }
 
 .loginBlock a {
   color: white;
+}
+
+.logoutButton {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  align-items: center;
+}
+
+.logoutButton img {
+  padding-left: 10px;
+  width: 30px; /* Adjust width as needed */
 }

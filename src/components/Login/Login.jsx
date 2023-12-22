@@ -4,7 +4,7 @@ import { Input, createField } from "../common/FormControls/FormControls";
 import { required } from "../../utils/validators/validators";
 import { connect } from "react-redux";
 import { login } from "../../redux/auth-reducer";
-import { Navigate } from "react-router-dom";
+import { Navigate, Link } from "react-router-dom";
 import styles from "./../common/FormControls/FormControls.module.css";
 
 const LoginForm = ({ handleSubmit, error, captchaUrl }) => {
@@ -29,7 +29,7 @@ const LoginForm = ({ handleSubmit, error, captchaUrl }) => {
         createField("Symbols from image", "captcha", [required], Input)}
       {error && <div className={styles.formSummaryError}>{error}</div>}
       <div>
-        <button>Login</button>
+        <button className={styles.loginButton}>Login</button>
       </div>
     </form>
   );
@@ -54,6 +54,9 @@ const Login = (props) => {
     <div>
       <h1>Login</h1>
       <LoginReduxForm onSubmit={onSubmit} captchaUrl={props.captchaUrl} />
+      <div className={styles.registerLink}>
+        <Link to="/register">Register Now</Link>
+      </div>
     </div>
   );
 };

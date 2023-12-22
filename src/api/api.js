@@ -68,6 +68,14 @@ export const authAPI = {
   logout() {
     return instance.delete(`auth/login`);
   },
+  register(name, email, login, password) {
+    return instance.post(`auth/register`, {
+      name,
+      email,
+      login,
+      password,
+    });
+  },
 };
 
 export const securityAPI = {

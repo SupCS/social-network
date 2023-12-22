@@ -9,6 +9,7 @@ import { compose } from "redux";
 import { initializeApp } from "./redux/app-reducer";
 import Preloader from "./components/common/Preloader/Preloader";
 import ErrorBoundary from "./ErrorBoundary";
+import RegisterForm from "./components/Login/RegisterForm";
 
 const DialogsContainer = React.lazy(() =>
   import("./components/Dialogs/DialogsContainer")
@@ -54,6 +55,7 @@ class App extends Component {
                   />
                   <Route path="/users" element={<UsersContainer />} />
                   <Route path="/login" element={<LoginPage />} />
+                  <Route path="/register" element={<RegisterForm />} />
                   <Route path="/" element={<Navigate to="/login" replace />} />
                 </Routes>
               </Suspense>

@@ -1,3 +1,12 @@
+form {
+  margin-top: 10px;
+}
+
+.formControl input {
+  padding: 12px 12px;
+  font-size: 14px;
+}
+
 .formControl.error input,
 .formControl.error textarea {
   border: 2px solid red;
@@ -11,4 +20,36 @@
   border: 1px red solid;
   padding: 5px;
   color: red;
+}
+
+.rememberMeCheckbox {
+  color: red;
+}
+
+.loginButton {
+  background-color: #4a065e;
+  border-radius: 8px;
+  border-width: 0;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  list-style: none;
+  margin: 10px 0 0 0;
+  padding: 10px 20px;
+  text-align: center;
+  transition: all 200ms;
+  vertical-align: baseline;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+h1 {
+  margin: 0;
 }
