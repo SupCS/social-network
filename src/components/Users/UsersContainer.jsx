@@ -25,6 +25,10 @@ class UsersContainer extends React.Component {
     this.props.requestUsers(currentPage, pageSize);
   }
 
+  onSearchChange = (searchTerm) => {
+    this.props.requestUsers(1, this.props.pageSize, searchTerm);
+  };
+
   onPageChanged = (pageNumber) => {
     let { pageSize } = this.props;
     this.props.requestUsers(pageNumber, pageSize);
@@ -45,6 +49,7 @@ class UsersContainer extends React.Component {
             follow={this.props.follow}
             unfollow={this.props.unfollow}
             followingInProgress={this.props.followingInProgress}
+            onSearchChange={this.onSearchChange}
           />
         )}
       </>

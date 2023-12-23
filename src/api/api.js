@@ -6,11 +6,16 @@ const instance = axios.create({
 });
 
 export const usersAPI = {
-  getUsers(currentPage = 1, pageSize = 10) {
+  getUsers(currentPage = 1, pageSize = 10, searchTerm = "") {
     return instance
-      .get(`users?page=${currentPage}&count=${pageSize}`, {
-        withCredentials: true,
-      })
+      .get(
+        `users?page=${currentPage}&count=${pageSize}&search=${encodeURIComponent(
+          searchTerm
+        )}`,
+        {
+          withCredentials: true,
+        }
+      )
       .then((response) => {
         return response.data;
       });
