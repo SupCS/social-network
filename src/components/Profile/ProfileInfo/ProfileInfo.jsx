@@ -88,9 +88,6 @@ const ProfileData = ({ profile, isOwner, goToEditMode, userId }) => {
         <b>My professional skills:</b> {profile.lookingForAJobDescription}
       </div>
       <div>
-        <b>About me:</b> {profile.aboutMe}
-      </div>
-      <div>
         <b>Сontacts:</b>{" "}
         {Object.keys(profile.contacts).map((key) => {
           const value = profile.contacts[key];
@@ -105,7 +102,9 @@ const ProfileData = ({ profile, isOwner, goToEditMode, userId }) => {
       </div>
       {isOwner && (
         <div>
-          <button onClick={goToEditMode}>Edit</button>
+          <button className={styles.editButton} onClick={goToEditMode}>
+            Edit
+          </button>
         </div>
       )}
       {!isOwner && (

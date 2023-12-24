@@ -7,3 +7,28 @@
   height: 50px;
   border-radius: 50px;
 }
+
+.postButtonsContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.deleteButton {
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  width: 25px;
+  height: 25px;
+}
+
+.deleteButton img {
+  width: 25px;
+  height: 25px;
+}
+
+.likeButton {
+  background-color: transparent;
+  border: none;
+}

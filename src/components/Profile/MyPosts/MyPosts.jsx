@@ -7,23 +7,22 @@ import {
   required,
 } from "../../../utils/validators/validators";
 import { Textarea } from "../../common/FormControls/FormControls";
+import PurpleButton from "../../common/Buttons/PurpleButton";
 
 const maxLength10 = maxLengthCreator(10);
 
 const MyPosts = React.memo((props) => {
-  let postsElements = [...props.posts]
-    .reverse()
-    .map((p) => (
-      <Post
-        key={p._id}
-        message={p.message}
-        likesCount={p.likes ? p.likes.length : 0}
-        onDelete={() => props.deletePost(p._id)}
-        isOwner={props.isOwner}
-        onLike={() => props.toggleLike(p._id)}
-        isLikedByCurrentUser={p.likes.includes(props.currentUserId)}
-      />
-    ));
+  let postsElements = [...props.posts].map((p) => (
+    <Post
+      key={p._id}
+      message={p.message}
+      likesCount={p.likes ? p.likes.length : 0}
+      onDelete={() => props.deletePost(p._id)}
+      isOwner={props.isOwner}
+      onLike={() => props.toggleLike(p._id)}
+      isLikedByCurrentUser={p.likes.includes(props.currentUserId)}
+    />
+  ));
 
   let onAddPost = (values) => {
     props.addPost(values.newPostText);
@@ -56,7 +55,7 @@ const AddNewPostForm = (props) => {
         ></Field>
       </div>
       <div>
-        <button>Add post</button>
+        <PurpleButton text="Add Post" />
       </div>
     </form>
   );

@@ -32,9 +32,6 @@ const ProfileDataForm = ({ handleSubmit, profile, error }) => {
         )}
       </div>
       <div>
-        <b>About me:</b> {createField("About me", "aboutMe", [], Textarea)}
-      </div>
-      <div>
         <b>Сontacts:</b>{" "}
         {Object.keys(profile.contacts).map((key) => {
           return (
