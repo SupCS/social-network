@@ -40,16 +40,30 @@ const ProfileInfo = ({
   return (
     <div>
       <div className={styles.description_block}>
-        <img
-          src={
-            profile.photos.large
-              ? `http://localhost:3001${profile.photos.large}`
-              : userPhoto
-          }
-          className={styles.avatar}
-          alt="profile pic"
-        />
-        {isOwner && <input type="file" onChange={onMainPhotoSelected} />}
+        <div className={styles.photo_block}>
+          <img
+            src={
+              profile.photos.large
+                ? `http://localhost:3001${profile.photos.large}`
+                : userPhoto
+            }
+            className={styles.avatar}
+            alt="profile pic"
+          />
+          {isOwner && (
+            <>
+              <input
+                type="file"
+                onChange={onMainPhotoSelected}
+                className={styles.hiddenFileInput}
+                id="fileInput"
+              />
+              <label htmlFor="fileInput" className={styles.customFileUpload}>
+                Upload Photo
+              </label>
+            </>
+          )}
+        </div>
         {editMode ? (
           <ProfileDataForm
             initialValues={profile}
