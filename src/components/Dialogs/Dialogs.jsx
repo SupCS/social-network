@@ -32,11 +32,15 @@ const Dialogs = ({
     socket.on("receive-message", (newMessage) => {
       if (newMessage.senderId === userId || newMessage.receiverId === userId) {
         if (newMessage.senderId !== currentUserId) {
-          dispatch(sendMessageCreator(newMessage));
+          dispatch(
+            sendMessageCreator({
+              ...newMessage,
+              senderName: newMessage.senderName,
+            })
+          );
         }
       } else if (newMessage.senderId !== currentUserId) {
-        // Пользователь, с которым нет открытого диалога, отправил сообщение
-        getDialogs(); // Запросить обновленный список диалогов
+        getDialogs();
       }
     });
 
