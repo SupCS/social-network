@@ -29,3 +29,11 @@ form {
 h1 {
   margin: 0;
 }
+
+.autoResizeTextarea {
+  border: none;
+  min-height: 30px;
+  min-width: 100px;
+  resize: none;
+  overflow: hidden;
+}

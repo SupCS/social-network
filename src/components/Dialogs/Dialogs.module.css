@@ -8,6 +8,7 @@
 .dialogsItems {
   grid-row: 1 / span 3;
   padding: 10px;
+  border-right: 1px solid #363738;
 }
 
 .messages {
@@ -15,6 +16,7 @@
   max-height: 500px;
   overflow-y: auto;
   padding: 10px;
+  border-bottom: 1px solid #363738;
 }
 
 .messageInput {

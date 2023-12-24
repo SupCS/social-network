@@ -5,6 +5,7 @@ import {
   required,
   maxLengthCreator,
 } from "../../../utils/validators/validators";
+import PurpleButton from "../../common/Buttons/PurpleButton";
 
 const maxLength50 = maxLengthCreator(50);
 
@@ -24,7 +25,7 @@ const AddMessageForm = (props) => {
         ></Field>
       </div>
       <div>
-        <button>Send</button>
+        <PurpleButton text="Send" />
       </div>
     </form>
   );
