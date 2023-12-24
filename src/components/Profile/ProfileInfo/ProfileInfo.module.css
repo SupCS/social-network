@@ -21,7 +21,9 @@
 }
 
 .avatar {
-  max-width: 300px;
+  width: 300px;
+  height: 400px;
+  object-fit: cover;
 }
 
 .contact {

@@ -98,10 +98,12 @@ export const updateStatus = (status) => async (dispatch) => {
     //
   }
 };
-export const savePhoto = (file) => async (dispatch) => {
-  let response = await profileAPI.savePhoto(file);
+export const savePhoto = (formData) => async (dispatch, getState) => {
+  let response = await profileAPI.savePhoto(formData);
   if (response.data.resultCode === 0) {
     dispatch(savePhotoSuccess(response.data.data.photos));
+    const userId = getState().auth.userId;
+    dispatch(getUserProfile(userId));
   }
 };
 export const saveProfile = (profile) => async (dispatch, getState) => {

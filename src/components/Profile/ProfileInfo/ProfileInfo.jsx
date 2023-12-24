@@ -22,7 +22,9 @@ const ProfileInfo = ({
 
   const onMainPhotoSelected = (e) => {
     if (e.target.files.length) {
-      savePhoto(e.target.files[0]);
+      const formData = new FormData();
+      formData.append("image", e.target.files[0]);
+      savePhoto(formData);
     }
   };
 
@@ -37,16 +39,13 @@ const ProfileInfo = ({
   };
   return (
     <div>
-      {/* <div className={classes.banner__container}>
-        <img
-          className={classes.banner}
-          src="https://hips.hearstapps.com/hmg-prod/images/champagne-beach-espiritu-santo-island-vanuatu-royalty-free-image-1655672510.jpg?crop=1.00xw:0.755xh;0,0.173xh&resize=1200:*"
-          alt="profile banner"
-        ></img>
-      </div> */}
       <div className={styles.description_block}>
         <img
-          src={profile.photos.large || userPhoto}
+          src={
+            profile.photos.large
+              ? `http://localhost:3001${profile.photos.large}`
+              : userPhoto
+          }
           className={styles.avatar}
           alt="profile pic"
         />
