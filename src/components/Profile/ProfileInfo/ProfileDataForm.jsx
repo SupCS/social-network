@@ -7,6 +7,10 @@ import {
 import { reduxForm } from "redux-form";
 import styles from "./ProfileInfo.module.css";
 import style from "../../common/FormControls/FormControls.module.css";
+import { maxLengthCreator } from "../../../utils/validators/validators";
+
+const maxLength25 = maxLengthCreator(25);
+const maxLength50 = maxLengthCreator(50);
 
 const ProfileDataForm = ({ handleSubmit, profile, error }) => {
   const goToEditMode = () => {
@@ -27,7 +31,7 @@ const ProfileDataForm = ({ handleSubmit, profile, error }) => {
         {createField(
           "My professional skills",
           "lookingForAJobDescription",
-          [],
+          [maxLength50],
           Textarea
         )}
       </div>
@@ -36,7 +40,8 @@ const ProfileDataForm = ({ handleSubmit, profile, error }) => {
         {Object.keys(profile.contacts).map((key) => {
           return (
             <div key={key} className={styles.contact}>
-              <b>{key}:</b> {createField(key, "contacts." + key, [], Input)}
+              <b>{key}:</b>{" "}
+              {createField(key, "contacts." + key, [maxLength25], Input)}
             </div>
           );
         })}

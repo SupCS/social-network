@@ -8,12 +8,16 @@ const ProfileStatus = (props) => {
     setStatus(props.status);
   }, [props.status]);
 
-  const editStatus = () => {
+  const toggleEditMode = () => {
     if (props.isOwner) {
       setEditMode(!editMode);
-      if (editMode) {
-        props.updateStatus(status);
-      }
+    }
+  };
+
+  const handleBlur = () => {
+    if (editMode) {
+      props.updateStatus(status);
+      setEditMode(false);
     }
   };
 
@@ -27,7 +31,7 @@ const ProfileStatus = (props) => {
         <div>
           <input
             autoFocus
-            onBlur={editStatus}
+            onBlur={handleBlur}
             onChange={onStatusChange}
             value={status}
           />
@@ -35,7 +39,7 @@ const ProfileStatus = (props) => {
       ) : (
         <div>
           <b>Status: </b>
-          <span onDoubleClick={editStatus}>
+          <span onDoubleClick={toggleEditMode}>
             {status ||
               (props.isOwner
                 ? "Hello, that's a default status! Double Click to change"

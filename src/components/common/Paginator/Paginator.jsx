@@ -46,10 +46,10 @@ let Paginator = ({ currentPage, onPageChanged, totalUsersCount, pageSize }) => {
         </span>
       ))}
 
-      {curPL < pagesCount && (
+      {currentPage < pagesCount && (
         <button onClick={() => onPageChanged(curP + 1)}>{`>`}</button>
       )}
-      {currentPage < pagesCount && (
+      {currentPage !== pagesCount && (
         <button onClick={() => onPageChanged(pagesCount)}>{`>>`}</button>
       )}
       <input
