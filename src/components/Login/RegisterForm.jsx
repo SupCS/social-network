@@ -19,7 +19,7 @@ const RegisterForm = ({ handleSubmit, error }) => {
   return (
     <>
       <h1>Registration</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} data-testid="register-form">
         {createField("Name", "name", [required, maxLength18], Input)}
         {createField("Email", "email", [required], Input, { type: "email" })}
         {createField("Login", "login", [required, maxLength18], Input)}
