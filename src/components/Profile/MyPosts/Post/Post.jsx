@@ -33,14 +33,22 @@ const Post = ({
       {message}
       <div className={classes.postButtonsContainer}>
         <span>{likesCount} likes</span>
-        <button className={classes.likeButton} onClick={handleLikeClick}>
+        <button
+          className={classes.likeButton}
+          onClick={handleLikeClick}
+          aria-label="Like button"
+        >
           <FontAwesomeIcon
             icon={liked ? faHeartSolid : faHeartRegular}
             style={{ color: "red", cursor: "pointer", fontSize: "18px" }}
           />
         </button>
         {isOwner && (
-          <button className={classes.deleteButton} onClick={onDelete}>
+          <button
+            className={classes.deleteButton}
+            onClick={onDelete}
+            aria-label="Delete button"
+          >
             <img src={deleteIcon} alt="delete post"></img>
           </button>
         )}
