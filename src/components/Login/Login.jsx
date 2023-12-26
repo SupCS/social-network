@@ -63,7 +63,7 @@ const Login = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  captchaUrl: state.auth.captchaUrl,
-  isAuth: state.auth.isAuth,
+  captchaUrl: state.auth?.captchaUrl,
+  isAuth: state.auth?.isAuth,
 });
 export default connect(mapStateToProps, { login })(Login);
