@@ -1,8 +1,9 @@
 import preloader from "../../../assets/images/loader.svg";
+import React from "react";
 
 let Preloader = (props) => {
   return (
-    <div style={{ bacgkroundColor: "white" }}>
+    <div data-testid="preloader" style={{ bacgkroundColor: "white" }}>
       <img src={preloader} alt="loader animation" />
     </div>
   );
