@@ -7,9 +7,13 @@ const DialogItem = (props) => {
 
   return (
     <div className={classes.dialog}>
-      <NavLink to={path}>{props.name}</NavLink>
+      <NavLink
+        to={path}
+        className={(navData) => (navData.isActive ? classes.activeDialog : "")}
+      >
+        {props.name}
+      </NavLink>
     </div>
   );
 };
-
 export default DialogItem;

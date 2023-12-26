@@ -48,3 +48,12 @@
 .ownMessage .message {
   background-color: #007bff;
 }
+
+.dialog a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.dialog .activeDialog {
+  color: gold;
+}
