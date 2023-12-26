@@ -5,11 +5,10 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { combineReducers, createStore } from "redux";
 import authReducer from "../../redux/auth-reducer";
-import HeaderContainer from "./HeaderContainer"; // Используйте HeaderContainer
+import HeaderContainer from "./HeaderContainer";
 
 const rootReducer = combineReducers({
   auth: authReducer,
-  // Другие редьюсеры, если нужно
 });
 
 describe("Header Component", () => {
