@@ -21,6 +21,7 @@ const MyPosts = React.memo((props) => {
       isOwner={props.isOwner}
       onLike={() => props.toggleLike(p._id)}
       isLikedByCurrentUser={p.likes.includes(props.currentUserId)}
+      postPhoto={props.postPhoto}
     />
   ));
 

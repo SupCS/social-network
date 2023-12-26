@@ -1,5 +1,6 @@
 .item {
   color: white;
+  margin-bottom: 20px;
 }
 
 .item img {
@@ -31,4 +32,8 @@
 .likeButton {
   background-color: transparent;
   border: none;
+}
+
+.postPhoto {
+  object-fit: cover;
 }

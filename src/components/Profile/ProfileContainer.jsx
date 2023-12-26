@@ -42,7 +42,6 @@ function ProfileContainer({
       clearProfile();
     };
   }, [userId, getUserProfile, getStatus, clearProfile, fetchPosts]);
-
   return (
     <div>
       <Profile
@@ -52,6 +51,7 @@ function ProfileContainer({
         isOwner={isOwner}
         savePhoto={savePhoto}
         saveProfile={saveProfile}
+        postPhoto={profile?.photos?.small}
       />
     </div>
   );

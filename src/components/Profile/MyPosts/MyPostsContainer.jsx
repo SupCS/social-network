@@ -31,7 +31,12 @@ const MyPostsContainer = connect(
   mapStateToProps,
   mapDispatchToProps
 )(({ isOwner, currentUserId, ...props }) => (
-  <MyPosts isOwner={isOwner} currentUserId={currentUserId} {...props} />
+  <MyPosts
+    postPhoto={props.postPhoto}
+    isOwner={isOwner}
+    currentUserId={currentUserId}
+    {...props}
+  />
 ));
 
 export default MyPostsContainer;

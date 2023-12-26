@@ -4,6 +4,7 @@ import deleteIcon from "../../../../assets/images/delete.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
+import userPhoto from "../../../../assets/images/user.png";
 
 const Post = ({
   message,
@@ -12,6 +13,7 @@ const Post = ({
   isLikedByCurrentUser,
   isOwner,
   onDelete,
+  postPhoto,
 }) => {
   const [liked, setLiked] = useState(isLikedByCurrentUser);
 
@@ -23,8 +25,9 @@ const Post = ({
     <div className={classes.item}>
       <div>
         <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/1200px-Cat03.jpg"
-          alt="avatar"
+          src={postPhoto ? `http://localhost:3001${postPhoto}` : userPhoto}
+          alt="user avatar"
+          className={classes.postPhoto}
         ></img>
       </div>
       {message}

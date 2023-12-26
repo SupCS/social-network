@@ -34,6 +34,7 @@ describe("ProfileStatus component", () => {
     render(<ProfileStatus status="Test status" isOwner={true} />);
     fireEvent.doubleClick(screen.getByText(/Test status/));
     await waitFor(() => {
+      // eslint-disable-next-line testing-library/prefer-presence-queries
       expect(screen.queryByRole("textbox")).toBeInTheDocument();
     });
     expect(screen.queryByText(/Test status/)).toBeNull();
@@ -51,6 +52,7 @@ describe("ProfileStatus component", () => {
     );
     fireEvent.doubleClick(screen.getByText(/Test status/));
     await waitFor(() => {
+      // eslint-disable-next-line testing-library/no-wait-for-side-effects
       fireEvent.blur(screen.getByRole("textbox"));
     });
     expect(mockUpdateStatus).toHaveBeenCalled();
