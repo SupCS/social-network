@@ -52,6 +52,7 @@ let Users = ({
           )
           .map((u) => (
             <User
+              isAuth={props.isAuth}
               user={u}
               followingInProgress={props.followingInProgress}
               key={u.id}

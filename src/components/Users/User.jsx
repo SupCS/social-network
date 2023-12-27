@@ -2,8 +2,26 @@ import React from "react";
 import styles from "./users.module.css";
 import userPhoto from "../../assets/images/user.png";
 import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-let User = ({ user, followingInProgress, unfollow, follow }) => {
+let User = ({ user, followingInProgress, unfollow, follow, isAuth }) => {
+  const navigate = useNavigate();
+
+  const handleFollow = () => {
+    if (!isAuth) {
+      navigate("/login");
+    } else {
+      follow(user.id);
+    }
+  };
+
+  const handleUnfollow = () => {
+    if (!isAuth) {
+      navigate("/login");
+    } else {
+      unfollow(user.id);
+    }
+  };
   return (
     <div className={styles.user}>
       <span>
@@ -25,9 +43,7 @@ let User = ({ user, followingInProgress, unfollow, follow }) => {
             <button
               className={styles.followUnfollowButton}
               disabled={followingInProgress.some((id) => id === user.id)}
-              onClick={() => {
-                unfollow(user.id);
-              }}
+              onClick={handleUnfollow}
             >
               Unfollow
             </button>
@@ -35,10 +51,7 @@ let User = ({ user, followingInProgress, unfollow, follow }) => {
             <button
               className={styles.followUnfollowButton}
               disabled={followingInProgress.some((id) => id === user.id)}
-              onClick={() => {
-                console.log("Following user ID:", user.id);
-                follow(user.id);
-              }}
+              onClick={handleFollow}
             >
               Follow
             </button>
