@@ -8,7 +8,7 @@ import io from "socket.io-client";
 import { useDispatch } from "react-redux";
 import { sendMessageCreator } from "../../redux/messages-reducer";
 
-const socket = io("http://localhost:3001"); // Подключение к серверу Socket.io
+const socket = io("http://localhost:3001");
 
 const Dialogs = ({
   getDialogs,
@@ -19,7 +19,7 @@ const Dialogs = ({
   currentUserId,
 }) => {
   const messagesEndRef = useRef(null);
-  const { userId } = useParams(); // Получаем userId из URL
+  const { userId } = useParams();
   const dispatch = useDispatch();
 
   const scrollToBottom = () => {

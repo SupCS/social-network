@@ -67,6 +67,4 @@ describe("Login Component", () => {
 
     expect(screen.getByText("Field is required")).toBeInTheDocument();
   });
-
-  // Дополнительные тесты валидации и отправки формы можно добавить здесь
 });

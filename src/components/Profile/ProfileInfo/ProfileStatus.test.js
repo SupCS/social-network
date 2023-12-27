@@ -1,6 +1,7 @@
 import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import ProfileStatus from "./ProfileStatus";
+import "@testing-library/jest-dom";
 
 describe("ProfileStatus component", () => {
   // Тест 1: Перевірка що стан з пропсів знаходиться в стейті

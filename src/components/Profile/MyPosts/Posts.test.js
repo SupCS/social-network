@@ -114,7 +114,7 @@ describe("Post Component", () => {
   });
 
   test("Delete and like buttons are visible as per the isOwner flag", () => {
-    // Рендерим компонент как не владелец
+    // Рендеримо компонент як невласник
     render(
       <Post
         message="Test post"
@@ -127,10 +127,10 @@ describe("Post Component", () => {
       />
     );
 
-    // Проверяем, что кнопка удаления не отображается
+    // Перевіряємо що кнопки видалення немає
     expect(screen.queryByLabelText("Delete button")).not.toBeInTheDocument();
 
-    // Проверяем, что кнопка лайка отображается
+    // Перевіряємо, що кнопка лайка - є
     expect(screen.getByLabelText("Like button")).toBeInTheDocument();
   });
 

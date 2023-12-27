@@ -14,7 +14,6 @@ const rootReducer = combineReducers({
 describe("Header Component", () => {
   const renderWithRedux = (component, { initialState } = {}) => {
     const store = createStore(rootReducer, initialState);
-    console.log("Текущее состояние хранилища:", store.getState()); // Вывод состояния хранилища
 
     // eslint-disable-next-line testing-library/render-result-naming-convention
     const rendered = render(
@@ -23,8 +22,7 @@ describe("Header Component", () => {
       </Provider>
     );
 
-    console.log("Отрендеренный компонент:", rendered.container.innerHTML); // Вывод отрендеренного компонента
-    return rendered;
+    console.log("Відрендерений компонент:", rendered.container.innerHTML);
   };
 
   test("should render login link if not authenticated", () => {

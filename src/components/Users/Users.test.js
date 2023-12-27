@@ -1,5 +1,6 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
+import "@testing-library/jest-dom";
 import Users from "./Users";
 import { BrowserRouter as Router } from "react-router-dom";
 import fetchMock from "jest-fetch-mock";
